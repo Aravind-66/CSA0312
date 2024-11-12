@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define n 4
+int rear = -1, front = 0, array[n], size = 0;
+
+void enqueue(int a);
+void dequeue();
+void show();
+
+int main() {
+    enqueue(20);
+    enqueue(30);
+    enqueue(45);
+    enqueue(50);
+    show();
+    dequeue();
+    dequeue();
+    show();
+    return 0;
+}
+
+void enqueue(int a) {
+    if (size == n) {
+        printf("\nOverflow");
+    } else {
+        rear = (rear + 1) % n;
+        array[rear] = a;
+        size++;
+    }
+}
+
+void dequeue() {
+    if (size == 0) {
+        printf("\nUnderflow");
+    } else {
+        printf("\nThe dequeued element: %d", array[front]);
+        front = (front + 1) % n;
+        size--;
+    }
+}
+
+void show() {
+    if (size == 0) {
+        printf("\nQueue is empty");
+    } else {
+        printf("\nThe elements in the queue:");
+        for (int i = 0; i < size; i++) {
+            printf("\n%d", array[(front + i) % n]);
+        }
+    }
+}
